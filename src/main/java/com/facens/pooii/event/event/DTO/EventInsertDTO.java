@@ -36,26 +36,26 @@ public class EventInsertDTO {
     public LocalDate getStartDate() {
         return startDate;
     }
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStartDate(String startDate) {
+        this.startDate = LocalDate.parse(startDate);
     }
     public LocalDate getEndDate() {
         return endDate;
     }
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setEndDate(String endDate) {
+        this.endDate = LocalDate.parse(endDate);
     }
     public LocalTime getStartTime() {
         return startTime;
     }
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+    public void setStartTime(String startTime) {
+        this.startTime = LocalTime.parse(startTime);
     }
     public LocalTime getEndTime() {
         return endTime;
     }
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
+    public void setEndTime(String endTime) {
+        this.endTime = LocalTime.parse(endTime);
     }
     public String getEmail() {
         return email;

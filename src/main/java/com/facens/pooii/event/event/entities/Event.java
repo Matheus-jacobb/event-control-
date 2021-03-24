@@ -112,6 +112,9 @@ public class Event implements Serializable {
         return true;
     }
 
+    public Event() {
+    }
+
     public Event(EventInsertDTO dto) {
         this.name = dto.getName();
         this.description = dto.getDescription();
@@ -122,8 +125,5 @@ public class Event implements Serializable {
         this.endTime = dto.getEndTime();
         this.email = dto.getEmail();
     }
-
-
-    
     
 }
