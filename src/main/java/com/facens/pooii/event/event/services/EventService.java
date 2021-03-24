@@ -8,6 +8,8 @@ import com.facens.pooii.event.event.entities.Event;
 import com.facens.pooii.event.event.repositories.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,8 +20,8 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    public List<Event> getAllEvents() {
-        return eventRepository.findAll();
+    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String place) {
+        return eventRepository.find(pageRequest, name, place);
     }
     
     public Event getEventById(Long id) {
