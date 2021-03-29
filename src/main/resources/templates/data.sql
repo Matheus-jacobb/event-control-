@@ -1,4 +1,4 @@
-INSERT INTO TB_Event (name, description, place, startDate, endDate, startTime, endTime, email) 
+INSERT INTO TB_Event (name, description, place, start_date, end_date, start_time, end_time, email) 
 VALUES (
     'Introdução Java', 
     'Palestra introdutoria sobre tecnologia java, crescimento, mercado e inovação', 
@@ -10,7 +10,7 @@ VALUES (
     'suporte@java.com.br'
     );
 
-    INSERT INTO TB_Event (name, description, place, startDate, endDate, startTime, endTime, email) 
+    INSERT INTO TB_Event (name, description, place, start_date, end_date, start_time, end_time, email) 
 VALUES (
     'Introdução Python', 
     'Palestra introdutoria sobre tecnologia python, crescimento, mercado e inovação', 
@@ -22,7 +22,7 @@ VALUES (
     'suporte@python.com.br'
     );
 
-    INSERT INTO TB_Event (name, description, place, startDate, endDate, startTime, endTime, email) 
+    INSERT INTO TB_Event (name, description, place, start_date, end_date, start_time, end_time, email) 
 VALUES (
     'Introdução C#', 
     'Palestra introdutoria sobre tecnologia C#, crescimento, mercado e inovação', 
@@ -34,7 +34,7 @@ VALUES (
     'suporte@csharp.com.br'
     );
 
-        INSERT INTO TB_Event (name, description, place, startDate, endDate, startTime, endTime, email) 
+        INSERT INTO TB_Event (name, description, place, start_date, end_date, start_time, end_time, email) 
 VALUES (
     'Introdução POWER BI', 
     'Palestra introdutoria sobre tecnologia PowerBI, crescimento, mercado e inovação', 
@@ -46,7 +46,7 @@ VALUES (
     'suporte@powerbi.com.br'
     );
 
-    INSERT INTO TB_Event (name, description, place, startDate, endDate, startTime, endTime, email) 
+    INSERT INTO TB_Event (name, description, place, start_date, end_date, start_time, end_time, email) 
 VALUES (
     'Introdução C', 
     'Palestra introdutoria sobre tecnologia Linguagem C, crescimento, mercado e inovação', 
