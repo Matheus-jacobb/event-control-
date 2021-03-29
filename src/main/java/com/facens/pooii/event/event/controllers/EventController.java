@@ -3,6 +3,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.facens.pooii.event.event.DTO.EventInsertDTO;
@@ -36,17 +37,19 @@ public class EventController {
     public ResponseEntity<Page<Event>> getAllEvents(
 
         @RequestParam(value = "page", defaultValue = "0") Integer page,
-        @RequestParam(value = "linesPerPage", defaultValue = "6") Integer linesPerPage,
+        @RequestParam(value = "linesPerPage", defaultValue = "2") Integer linesPerPage,
         @RequestParam(value = "direction", defaultValue = "ASC") String direction,
         @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
         @RequestParam(value = "name", defaultValue = "") String name,
-        @RequestParam(value = "place", defaultValue = "") String place
+        @RequestParam(value = "place", defaultValue = "") String place,
+        /*@RequestParam(value = "startDate", defaultValue = "") LocalDate startDate,*/
+        @RequestParam(value = "description", defaultValue = "") String description
 
     )
     
     {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-        Page<Event> events = service.getAllEvents(pageRequest, name, place);
+        Page<Event> events = service.getAllEvents(pageRequest, name, place, /*startDate,*/ description);
         return ResponseEntity.ok().body(events);
     }
 

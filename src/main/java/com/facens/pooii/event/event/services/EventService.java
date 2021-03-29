@@ -1,5 +1,6 @@
 package com.facens.pooii.event.event.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,8 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String place) {
-        return eventRepository.find(pageRequest, name, place);
+    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String place, /*LocalDate startDate,*/ String description) {
+        return eventRepository.find(pageRequest, name, place, /*startDate,*/ description);
     }
     
     public Event getEventById(Long id) {
@@ -37,7 +38,7 @@ public class EventService {
         return event;
     }
 
-    public Event updateEvent(Long id, EventInsertDTO dto) {
+        public Event updateEvent(Long id, EventInsertDTO dto) {
         try {
             Event event = eventRepository.getOne(id);
             event.setName(dto.getName());
@@ -63,5 +64,6 @@ public class EventService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
         }
     }
+    
     
 }
