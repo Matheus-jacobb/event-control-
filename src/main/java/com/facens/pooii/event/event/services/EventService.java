@@ -22,8 +22,8 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String place, /*LocalDate startDate,*/ String description) {
-        return eventRepository.find(pageRequest, name, place, /*startDate,*/ description);
+    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String place, String startDate, String description) {
+        return eventRepository.find(pageRequest, name, place, LocalDate.parse(startDate), description);
     }
     
     public Event getEventById(Long id) {

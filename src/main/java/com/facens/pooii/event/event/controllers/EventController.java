@@ -42,14 +42,14 @@ public class EventController {
         @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
         @RequestParam(value = "name", defaultValue = "") String name,
         @RequestParam(value = "place", defaultValue = "") String place,
-        /*@RequestParam(value = "startDate", defaultValue = "") LocalDate startDate,*/
+        @RequestParam(value = "startDate", defaultValue = "0000-01-01") String startDate,
         @RequestParam(value = "description", defaultValue = "") String description
 
     )
     
     {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-        Page<Event> events = service.getAllEvents(pageRequest, name, place, /*startDate,*/ description);
+        Page<Event> events = service.getAllEvents(pageRequest, name, place, startDate, description);
         return ResponseEntity.ok().body(events);
     }
 
@@ -63,7 +63,7 @@ public class EventController {
     public ResponseEntity<Event> insertEvent (@RequestBody EventInsertDTO insertDTO){
         Event event = service.insertEvent(insertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(event.getId()).toUri();
-        return ResponseEntity.created(uri).body(event);
+        return ResponseEntity.created(uri).body(event); 
     }
     
     @DeleteMapping("/{id}")
