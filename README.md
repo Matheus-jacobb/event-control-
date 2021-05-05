@@ -9,3 +9,8 @@
  - Data de Início = Listar eventos que começam depois da data de início passada.
  - Heroku: https://event-poo-ac1.herokuapp.com/
  - Arquitetura em Camadas Usando DTOs.
+
+
+#Dupla
+ - Matheus Jacob Bendel - 190299
+ - Antonio Canno de Araujo - 190929
