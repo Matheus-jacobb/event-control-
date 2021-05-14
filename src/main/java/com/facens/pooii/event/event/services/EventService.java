@@ -1,7 +1,6 @@
 package com.facens.pooii.event.event.services;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 import com.facens.pooii.event.event.DTO.EventInsertDTO;
