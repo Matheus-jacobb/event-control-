@@ -38,7 +38,6 @@ public class Event implements Serializable {
     private Long amountPayedTickets;
     private Double priceTicket;
     // private Admin admin;
-
     // private List<Place> places = new ArrayList<>();
 
     @OneToMany
