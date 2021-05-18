@@ -10,15 +10,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ID_TICKET")
+@Table(name = "TB_TICKET")
 public class Ticket implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private enum Type{ FREE, PAYED;}
+    // private enum Type{ FREE, PAYED;}
     private Instant date;
     private Double price;
+
+    public Ticket(){
+
+    }
 
     public Ticket(Long id, Instant date, Double price) {
         this.id = id;
@@ -27,7 +31,7 @@ public class Ticket implements Serializable{
     }
 
     //example of enum in java
-    //Type tipo = Type.FREE;
+    //Type type = Type.FREE;
 
     public Long getId() {
         return id;
@@ -51,10 +55,6 @@ public class Ticket implements Serializable{
     public Ticket(Instant date, Double price) {
         this.date = date;
         this.price = price;
-    }
-
-    public Ticket(){
-
     }
 
     @Override

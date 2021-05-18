@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "BASE_USER_ID")
 public class Admin extends BaseUser{
     private String phoneNumber;
-    private List<Event> events = new ArrayList<>();
+    // private List<Event> events = new ArrayList<>();
 
     public Admin(String phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -31,12 +31,12 @@ public class Admin extends BaseUser{
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
+    // public List<Event> getEvents() {
+    //     return events;
+    // }
 
-    public void addEvents(Event event) {
-        this.events.add(event);
-    }
+    // public void addEvents(Event event) {
+    //     this.events.add(event);
+    // }
     
 }

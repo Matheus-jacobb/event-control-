@@ -19,7 +19,7 @@ public class Place implements Serializable{
     private Long id;
     private String name;
     private String address;
-    private List<Event> events = new ArrayList<>();
+    // private List<Event> events = new ArrayList<>();
 
     public Place() {
 
@@ -50,13 +50,13 @@ public class Place implements Serializable{
         this.address = address;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
+    // public List<Event> getEvents() {
+    //     return events;
+    // }
 
-    public void addEvents(Event event) {
-        this.events.add(event);
-    }
+    // public void addEvents(Event event) {
+    //     this.events.add(event);
+    // }
 
     @Override
     public int hashCode() {

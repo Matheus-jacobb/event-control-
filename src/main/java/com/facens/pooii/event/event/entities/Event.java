@@ -37,9 +37,9 @@ public class Event implements Serializable {
     private Long amountFreeTickets;
     private Long amountPayedTickets;
     private Double priceTicket;
-    private Admin admin;
+    // private Admin admin;
 
-    private List<Place> places = new ArrayList<>();
+    // private List<Place> places = new ArrayList<>();
 
     @OneToMany
     @JoinColumn(name = "EVENT_ID")
@@ -136,33 +136,29 @@ public class Event implements Serializable {
         this.priceTicket = priceTicket;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
+    // public List<Ticket> getTickets() {
+    //     return tickets;
+    // }
 
-    public void addTicket(Ticket ticket) {
-        this.tickets.add(ticket);
-    }
-    
-    public void setTickets(Ticket ticket) {
-        this.tickets.add(ticket);
-    }
+    // public void addTicket(Ticket ticket) {
+    //     this.tickets.add(ticket);
+    // }
 
-    public Admin getAdmin() {
-        return admin;
-    }
+    // public Admin getAdmin() {
+    //     return admin;
+    // }
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
+    // public void setAdmin(Admin admin) {
+    //     this.admin = admin;
+    // }
 
-    public List<Place> getPlaces() {
-        return places;
-    }
+    // public List<Place> getPlaces() {
+    //     return places;
+    // }
 
-    public void setPlaces(List<Place> places) {
-        this.places = places;
-    }
+    // public void setPlaces(List<Place> places) {
+    //     this.places = places;
+    // }
 
     @Override
     public int hashCode() {
