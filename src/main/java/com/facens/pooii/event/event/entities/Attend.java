@@ -9,10 +9,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.facens.pooii.event.event.DTO.AttendInsertDTO;
+
 @Entity
 @Table(name = "TB_ATTEND")
 @PrimaryKeyJoinColumn(name = "BASE_USER_ID")
-public class Attend extends BaseUser{
+public class Attend extends BaseUser {
     private Double balance;
 
     @OneToMany
@@ -28,6 +30,11 @@ public class Attend extends BaseUser{
         this.balance = balance;
     }
 
+    public Attend(AttendInsertDTO dto) {
+        super(dto.getName(), dto.getEmail());
+        this.balance = dto.getBalance();
+    }
+
     public Double getBalance() {
         return balance;
     }
@@ -37,11 +44,11 @@ public class Attend extends BaseUser{
     }
 
     // public List<Ticket> getTickets() {
-    //     return tickets;
+    // return tickets;
     // }
 
     // public void addTicket(Ticket ticket) {
-    //     this.tickets.add(ticket);
+    // this.tickets.add(ticket);
     // }
-    
+
 }

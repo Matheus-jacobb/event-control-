@@ -4,6 +4,6 @@ import com.facens.pooii.event.event.entities.Admin;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AdminRepository extends JpaRepository <Admin, Long> {
-    
+public interface AdminRepository extends JpaRepository<Admin, Long> {
+
 }

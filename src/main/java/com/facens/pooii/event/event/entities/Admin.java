@@ -12,7 +12,7 @@ import com.facens.pooii.event.event.DTO.AdminInsertDTO;
 @Entity
 @Table(name = "TB_ADMIN")
 @PrimaryKeyJoinColumn(name = "BASE_USER_ID")
-public class Admin extends BaseUser{
+public class Admin extends BaseUser {
     private String phoneNumber;
     // private List<Event> events = new ArrayList<>();
 
@@ -25,6 +25,11 @@ public class Admin extends BaseUser{
         this.phoneNumber = phoneNumber;
     }
 
+    public Admin(AdminInsertDTO dto) {
+        super(dto.getName(), dto.getEmail());
+        this.phoneNumber = dto.getPhoneNumber();
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -34,16 +39,11 @@ public class Admin extends BaseUser{
     }
 
     // public List<Event> getEvents() {
-    //     return events;
+    // return events;
     // }
 
     // public void addEvents(Event event) {
-    //     this.events.add(event);
+    // this.events.add(event);
     // }
 
-    public Admin(AdminInsertDTO dto) {
-        super(dto.getName(), dto.getEmail());
-        this.phoneNumber = dto.getPhoneNumber();
-    }
-    
 }
