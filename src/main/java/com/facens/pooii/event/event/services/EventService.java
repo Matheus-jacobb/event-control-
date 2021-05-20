@@ -21,10 +21,11 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String place, String startDate, String description) {
+    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String place, String startDate,
+            String description) {
         return eventRepository.find(pageRequest, name, place, LocalDate.parse(startDate), description);
     }
-    
+
     public Event getEventById(Long id) {
         Optional<Event> op = eventRepository.findById(id);
         Event event = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
@@ -37,7 +38,15 @@ public class EventService {
         return event;
     }
 
-        public Event updateEvent(Long id, EventInsertDTO dto) {
+    public void deleteEvent(Long id) {
+        try {
+            eventRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
+        }
+    }
+
+    public Event updateEvent(Long id, EventInsertDTO dto) {
         try {
             Event event = eventRepository.getOne(id);
             event.setName(dto.getName());
@@ -51,18 +60,8 @@ public class EventService {
             event = eventRepository.save(event);
             return event;
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
-        }
-    }
-
-    public void deleteEvent(Long id) {
-        try{
-            eventRepository.deleteById(id);
-        }
-        catch(EmptyResultDataAccessException e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
         }
     }
-    
-    
+
 }

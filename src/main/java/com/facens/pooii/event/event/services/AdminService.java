@@ -8,6 +8,7 @@ import com.facens.pooii.event.event.entities.Admin;
 import com.facens.pooii.event.event.repositories.AdminRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,20 +19,40 @@ public class AdminService {
     @Autowired
     AdminRepository adminRepository;
 
-    public List<Admin> getAllAdmins(){
+    public List<Admin> getAllAdmins() {
         return adminRepository.findAll();
     }
 
-    public Admin getAdminById(Long id){
+    public Admin getAdminById(Long id) {
         Optional<Admin> op = adminRepository.findById(id);
         Admin admin = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin not found"));
         return admin;
     }
 
-    public Admin insertAdmin(AdminInsertDTO dto){
+    public Admin insertAdmin(AdminInsertDTO dto) {
         Admin admin = new Admin(dto);
         admin = adminRepository.save(admin);
         return admin;
     }
-    
+
+    public void deleteAdmin(Long id) {
+        try {
+            adminRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin not found");
+        }
+    }
+
+    public Admin updateAdmin(Long id, AdminInsertDTO dto) {
+        try {
+            Admin admin = adminRepository.getOne(id);
+            admin.setName(dto.getName());
+            admin.setEmail(dto.getEmail());
+            admin.setPhoneNumber(dto.getPhoneNumber());
+            return admin;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin not found");
+        }
+    }
+
 }
