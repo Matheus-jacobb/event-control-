@@ -22,9 +22,14 @@ public class BaseUser implements Serializable {
     private String email;
 
     public BaseUser() {
+
     }
     public BaseUser(Long id, String name, String email) {
         this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+    public BaseUser(String name, String email) {
         this.name = name;
         this.email = email;
     }

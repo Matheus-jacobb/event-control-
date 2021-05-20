@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.facens.pooii.event.event.DTO.AdminInsertDTO;
+
 @Entity
 @Table(name = "TB_ADMIN")
 @PrimaryKeyJoinColumn(name = "BASE_USER_ID")
@@ -38,5 +40,10 @@ public class Admin extends BaseUser{
     // public void addEvents(Event event) {
     //     this.events.add(event);
     // }
+
+    public Admin(AdminInsertDTO dto) {
+        super(dto.getName(), dto.getEmail());
+        this.phoneNumber = dto.getPhoneNumber();
+    }
     
 }

@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/events")
-
 public class EventController {
     
     @Autowired
