@@ -11,5 +11,5 @@ public class AdminInsertDTO extends BaseUserDTO {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    
+
 }

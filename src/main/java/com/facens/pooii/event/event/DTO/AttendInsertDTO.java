@@ -11,5 +11,5 @@ public class AttendInsertDTO extends BaseUserDTO {
     public void setBalance(Double balance) {
         this.balance = balance;
     }
-    
+
 }

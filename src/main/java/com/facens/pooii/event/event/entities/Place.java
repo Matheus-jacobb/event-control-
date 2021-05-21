@@ -1,8 +1,6 @@
 package com.facens.pooii.event.event.entities;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,20 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ID_PLACE")
-public class Place implements Serializable{
+@Table(name = "TB_PLACE")
+public class Place implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String address;
-    // private List<Event> events = new ArrayList<>();
 
     public Place() {
 
     }
-    
+
     public Place(Long id, String name, String address) {
         this.id = id;
         this.name = name;
@@ -34,28 +31,33 @@ public class Place implements Serializable{
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getAddress() {
         return address;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
 
     // public List<Event> getEvents() {
-    //     return events;
+    // return events;
     // }
 
     // public void addEvents(Event event) {
-    //     this.events.add(event);
+    // this.events.add(event);
     // }
 
     @Override
@@ -65,6 +67,7 @@ public class Place implements Serializable{
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

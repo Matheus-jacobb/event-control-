@@ -38,7 +38,7 @@ public class EventController {
             @RequestParam(value = "direction", defaultValue = "ASC") String direction,
             @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
             @RequestParam(value = "name", defaultValue = "") String name,
-            @RequestParam(value = "place", defaultValue = "") String place,
+            // @RequestParam(value = "place", defaultValue = "") String place,
             @RequestParam(value = "startDate", defaultValue = "0000-01-01") String startDate,
             @RequestParam(value = "description", defaultValue = "") String description
 
@@ -46,7 +46,7 @@ public class EventController {
 
     {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-        Page<Event> events = service.getAllEvents(pageRequest, name, place, startDate, description);
+        Page<Event> events = service.getAllEvents(pageRequest, name, startDate, description);
         return ResponseEntity.ok().body(events);
     }
 

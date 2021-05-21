@@ -21,9 +21,9 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String place, String startDate,
+    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String startDate,
             String description) {
-        return eventRepository.find(pageRequest, name, place, LocalDate.parse(startDate), description);
+        return eventRepository.find(pageRequest, name, LocalDate.parse(startDate), description);
     }
 
     public Event getEventById(Long id) {
@@ -51,7 +51,6 @@ public class EventService {
             Event event = eventRepository.getOne(id);
             event.setName(dto.getName());
             event.setDescription(dto.getDescription());
-            event.setPlace(dto.getPlace());
             event.setStartDate(dto.getStartDate());
             event.setEndDate(dto.getEndDate());
             event.setStartTime(dto.getStartTime());
