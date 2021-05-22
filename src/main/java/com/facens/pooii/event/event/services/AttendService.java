@@ -49,6 +49,7 @@ public class AttendService {
             attend.setName(dto.getName());
             attend.setEmail(dto.getEmail());
             attend.setBalance(dto.getBalance());
+            attend = attendRepository.save(attend);
             return attend;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attend not found");
