@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -39,6 +40,9 @@ public class Event implements Serializable {
     private Long amountPayedTickets;
     private Double priceTicket;
 
+    @ManyToOne
+    private Admin admin;
+
     @ManyToMany
     @JoinTable(name = "TB_EVENT_PLACE")
     private List<Place> places = new ArrayList<>();
@@ -52,7 +56,7 @@ public class Event implements Serializable {
     }
 
     public Event() {
-        
+
     }
 
     public Event(EventInsertDTO dto) {
@@ -161,13 +165,13 @@ public class Event implements Serializable {
     // this.tickets.add(ticket);
     // }
 
-    // public Admin getAdmin() {
-    // return admin;
-    // }
+    public Admin getAdmin() {
+        return admin;
+    }
 
-    // public void setAdmin(Admin admin) {
-    // this.admin = admin;
-    // }
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 
     // public List<Place> getPlaces() {
     // return places;

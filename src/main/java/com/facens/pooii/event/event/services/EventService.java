@@ -21,8 +21,7 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String startDate,
-            String description) {
+    public Page<Event> getAllEvents(PageRequest pageRequest, String name, String startDate, String description) {
         return eventRepository.find(pageRequest, name, LocalDate.parse(startDate), description);
     }
 

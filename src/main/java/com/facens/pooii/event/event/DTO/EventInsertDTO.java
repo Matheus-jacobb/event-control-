@@ -3,6 +3,8 @@ package com.facens.pooii.event.event.DTO;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.facens.pooii.event.event.entities.Admin;
+
 public class EventInsertDTO {
 
     private String name;
@@ -12,6 +14,15 @@ public class EventInsertDTO {
     private LocalTime startTime;
     private LocalTime endTime;
     private String email;
+    private Admin admin;
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 
     public String getName() {
         return name;
