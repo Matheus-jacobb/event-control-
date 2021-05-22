@@ -21,6 +21,10 @@ public class Admin extends BaseUser {
     @JoinColumn(name = "ADMIN_ID")
     private List<Event> events = new ArrayList<>();
 
+    public Admin() {
+        
+    }
+
     public Admin(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }

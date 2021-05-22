@@ -22,7 +22,7 @@ public class BaseUser implements Serializable {
     private String email;
 
     public BaseUser() {
-
+        
     }
 
     public BaseUser(Long id, String name, String email) {

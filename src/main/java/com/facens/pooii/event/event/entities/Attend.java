@@ -22,6 +22,10 @@ public class Attend extends BaseUser {
     @JoinColumn(name = "ATTEND_ID")
     private List<Ticket> tickets = new ArrayList<>();
 
+    public Attend() {
+        
+    }
+
     public Attend(Double balance) {
         this.balance = balance;
     }
