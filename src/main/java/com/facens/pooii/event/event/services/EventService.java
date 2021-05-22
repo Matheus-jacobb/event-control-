@@ -32,9 +32,22 @@ public class EventService {
     }
 
     public Event insertEvent(EventInsertDTO dto) {
+        String log = "";
         Event event = new Event(dto);
-        event = eventRepository.save(event);
-        return event;
+        try {
+            if (event.getStartDate().isBefore(LocalDate.now())) {
+                log = "Disagreement with date rule. Start date before today!";
+                throw new Exception();
+            } else if (event.getEndDate().isBefore(event.getStartDate())) {
+                log = "Disagreement with date rule. End date before start date!";
+                throw new Exception();
+            } else {
+                event = eventRepository.save(event);
+                return event;
+            }
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exception found. " + log, e);
+        }
     }
 
     public void deleteEvent(Long id) {
@@ -46,19 +59,33 @@ public class EventService {
     }
 
     public Event updateEvent(Long id, EventInsertDTO dto) {
+        String log = "";
         try {
-            Event event = eventRepository.getOne(id);
-            event.setName(dto.getName());
-            event.setDescription(dto.getDescription());
-            event.setStartDate(dto.getStartDate());
-            event.setEndDate(dto.getEndDate());
-            event.setStartTime(dto.getStartTime());
-            event.setEndTime(dto.getEndTime());
-            event.setEmail(dto.getEmail());
-            event = eventRepository.save(event);
-            return event;
+            if (dto.getStartDate().isBefore(LocalDate.now())) {
+                log = "Disagreement with date rule. Start date before today!";
+                throw new Exception();
+            } else if (dto.getEndDate().isBefore(dto.getStartDate())) {
+                log = "Disagreement with date rule. End date before start date!";
+                throw new Exception();
+            } else {
+                try {
+                    Event event = eventRepository.getOne(id);
+                    event.setName(dto.getName());
+                    event.setDescription(dto.getDescription());
+                    event.setStartDate(dto.getStartDate());
+                    event.setEndDate(dto.getEndDate());
+                    event.setStartTime(dto.getStartTime());
+                    event.setEndTime(dto.getEndTime());
+                    event.setEmail(dto.getEmail());
+                    event = eventRepository.save(event);
+                    return event;
+                } catch (Exception e) {
+                    log = "Event not found.";
+                    throw new Exception();
+                }
+            }
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exception found. " + log, e);
         }
     }
 
