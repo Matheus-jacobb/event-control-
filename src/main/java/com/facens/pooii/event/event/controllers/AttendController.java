@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping("/attends")
+@RequestMapping("/attendees")
 public class AttendController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class AttendController {
         List<Attend> attends = attendService.getAllAttend();
         return ResponseEntity.ok().body(attends);
     }
-
+    
     @GetMapping("/{id}")
     public ResponseEntity<Attend> getAttendById(@PathVariable Long id) {
         Attend attend = attendService.getAttendById(id);

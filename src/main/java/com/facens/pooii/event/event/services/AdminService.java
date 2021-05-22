@@ -49,6 +49,7 @@ public class AdminService {
             admin.setName(dto.getName());
             admin.setEmail(dto.getEmail());
             admin.setPhoneNumber(dto.getPhoneNumber());
+            admin = adminRepository.save(admin);
             return admin;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin not found");
