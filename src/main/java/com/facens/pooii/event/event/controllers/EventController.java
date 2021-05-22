@@ -9,6 +9,7 @@ import com.facens.pooii.event.event.DTO.EventInsertDTO;
 import com.facens.pooii.event.event.entities.Event;
 import com.facens.pooii.event.event.services.AdminService;
 import com.facens.pooii.event.event.services.EventService;
+import com.facens.pooii.event.event.services.PlaceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,6 +34,9 @@ public class EventController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private PlaceService placeService;
 
     @GetMapping
     public ResponseEntity<Page<Event>> getAllEvents(
@@ -77,6 +81,16 @@ public class EventController {
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody EventInsertDTO updatDTO) {
         Event event = eventService.updateEvent(id, updatDTO);
+        return ResponseEntity.ok().body(event);
+    }
+
+    // AF
+
+    @PostMapping("/{idEvent}/places/{idPlace}")
+    public ResponseEntity<Event> insertEventPlace(@RequestBody EventInsertDTO dto, @PathVariable Long idEvent,
+            @PathVariable Long idPlace) {
+        Event event = eventService.getEventById(idEvent);
+        event.setPlaces(placeService.getPlaceById(idPlace));
         return ResponseEntity.ok().body(event);
     }
 

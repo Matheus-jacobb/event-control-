@@ -173,13 +173,13 @@ public class Event implements Serializable {
         this.admin = admin;
     }
 
-    // public List<Place> getPlaces() {
-    // return places;
-    // }
+    public List<Place> getPlaces() {
+    return places;
+    }
 
-    // public void setPlaces(List<Place> places) {
-    // this.places = places;
-    // }
+    public void setPlaces(Place place) {
+    this.places.add(place);
+    }
 
     @Override
     public int hashCode() {
