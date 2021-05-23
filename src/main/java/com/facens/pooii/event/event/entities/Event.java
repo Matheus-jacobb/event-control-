@@ -44,15 +44,15 @@ public class Event implements Serializable {
     @ManyToOne
     private Admin admin;
 
-    @ManyToMany
-    @JoinTable(name = "TB_EVENT_PLACE")
-    @JsonIgnore
-    private List<Place> places = new ArrayList<>();
+    // @ManyToMany
+    // @JoinTable(name = "TB_EVENT_PLACE")
+    // @JsonIgnore
+    // private List<Place> places = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "EVENT_ID")
-    @JsonIgnore
-    private List<Ticket> tickets = new ArrayList<>();
+    // @OneToMany(cascade = CascadeType.PERSIST)
+    // @JoinColumn(name = "EVENT_ID")
+    // @JsonIgnore
+    // private List<Ticket> tickets = new ArrayList<>();
 
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -185,13 +185,13 @@ public class Event implements Serializable {
         this.priceTicket = priceTicket;
     }
 
-    public List<Ticket> getTickets() {
-    return tickets;
-    }
+    // public List<Ticket> getTickets() {
+    // return tickets;
+    // }
 
-    public void addTicket(Ticket ticket) {
-    this.tickets.add(ticket);
-    }
+    // public void addTicket(Ticket ticket) {
+    // this.tickets.add(ticket);
+    // }
 
     public Admin getAdmin() {
         return admin;
@@ -201,13 +201,13 @@ public class Event implements Serializable {
         this.admin = admin;
     }
 
-    public List<Place> getPlaces() {
-    return places;
-    }
+    // public List<Place> getPlaces() {
+    // return places;
+    // }
 
-    public void setPlaces(Place place) {
-    this.places.add(place);
-    }
+    // public void setPlaces(Place place) {
+    // this.places.add(place);
+    // }
 
     /**
      * Hash code and equals

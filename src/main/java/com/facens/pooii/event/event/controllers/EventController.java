@@ -91,7 +91,7 @@ public class EventController {
     public ResponseEntity<Event> insertEventPlace(@RequestBody EventInsertDTO dto, @PathVariable Long idEvent,
             @PathVariable Long idPlace) {
         Event event = eventService.getEventById(idEvent);
-        event.setPlaces(placeService.getPlaceById(idPlace));
+        // event.setPlaces(placeService.getPlaceById(idPlace));
         return ResponseEntity.ok().body(event);
     }
 
