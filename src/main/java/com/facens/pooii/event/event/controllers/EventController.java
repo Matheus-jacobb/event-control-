@@ -7,7 +7,6 @@ import java.net.URI;
 
 import com.facens.pooii.event.event.DTO.EventInsertDTO;
 import com.facens.pooii.event.event.entities.Event;
-import com.facens.pooii.event.event.services.AdminService;
 import com.facens.pooii.event.event.services.EventService;
 import com.facens.pooii.event.event.services.PlaceService;
 
@@ -31,9 +30,6 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
-
-    @Autowired
-    private AdminService adminService;
 
     @Autowired
     private PlaceService placeService;
@@ -64,10 +60,9 @@ public class EventController {
         return ResponseEntity.ok().body(event);
     }
 
-    @PostMapping("/{idAdmin}") // Admin ID
+    @PostMapping("/{idAdmin}")
     public ResponseEntity<Event> insertEvent(@PathVariable Long idAdmin, @RequestBody EventInsertDTO insertDTO) {
-        Event event = eventService.insertEvent(insertDTO);
-        event.setAdmin(adminService.getAdminById(idAdmin));
+        Event event = eventService.insertEvent(idAdmin, insertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(event.getId()).toUri();
         return ResponseEntity.created(uri).body(event);
     }

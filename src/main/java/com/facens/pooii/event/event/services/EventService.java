@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import com.facens.pooii.event.event.DTO.EventInsertDTO;
+import com.facens.pooii.event.event.entities.Admin;
 import com.facens.pooii.event.event.entities.Event;
 import com.facens.pooii.event.event.repositories.EventRepository;
 
@@ -21,6 +22,9 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private AdminService adminService;
+
     public Page<Event> getAllEvents(PageRequest pageRequest, String name, String startDate, String description) {
         return eventRepository.find(pageRequest, name, LocalDate.parse(startDate), description);
     }
@@ -31,9 +35,12 @@ public class EventService {
         return event;
     }
 
-    public Event insertEvent(EventInsertDTO dto) {
+    public Event insertEvent(Long id, EventInsertDTO dto) {
         String log = "";
         Event event = new Event(dto);
+        Admin admin = adminService.getAdminById(id);
+        event.setAdmin(admin);
+        admin.addEvents(event);
         try {
             if (event.getStartDate().isBefore(LocalDate.now())) {
                 log = "Disagreement with date rule. Start date before today!";
@@ -70,6 +77,10 @@ public class EventService {
             } else {
                 try {
                     Event event = eventRepository.getOne(id);
+                    if(event.getEndDate().isBefore(LocalDate.now())){
+                        log = "Unable to update a closed event!";
+                        throw new Exception();
+                    }
                     event.setName(dto.getName());
                     event.setDescription(dto.getDescription());
                     event.setStartDate(dto.getStartDate());
