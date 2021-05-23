@@ -157,13 +157,13 @@ public class Event implements Serializable {
         this.priceTicket = priceTicket;
     }
 
-    // public List<Ticket> getTickets() {
-    // return tickets;
-    // }
+    public List<Ticket> getTickets() {
+    return tickets;
+    }
 
-    // public void addTicket(Ticket ticket) {
-    // this.tickets.add(ticket);
-    // }
+    public void addTicket(Ticket ticket) {
+    this.tickets.add(ticket);
+    }
 
     public Admin getAdmin() {
         return admin;

@@ -4,11 +4,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 import com.facens.pooii.event.event.DTO.EventInsertDTO;
 import com.facens.pooii.event.event.entities.Event;
+import com.facens.pooii.event.event.entities.Ticket;
 import com.facens.pooii.event.event.services.EventService;
 import com.facens.pooii.event.event.services.PlaceService;
+import com.facens.pooii.event.event.services.TicketService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,6 +36,9 @@ public class EventController {
 
     @Autowired
     private PlaceService placeService;
+
+    @Autowired
+    private TicketService ticketService;
 
     @GetMapping
     public ResponseEntity<Page<Event>> getAllEvents(
@@ -87,6 +93,12 @@ public class EventController {
         Event event = eventService.getEventById(idEvent);
         event.setPlaces(placeService.getPlaceById(idPlace));
         return ResponseEntity.ok().body(event);
+    }
+
+    @GetMapping("/{id}/tickets")
+    public ResponseEntity<List<Ticket>> getAllTickets(@PathVariable Long id) {
+        List<Ticket> tickets = ticketService.getTicketByEvent(id);
+        return ResponseEntity.ok().body(tickets);
     }
 
 }
