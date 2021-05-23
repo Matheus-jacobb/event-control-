@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.facens.pooii.event.event.DTO.EventInsertDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "TB_EVENT")
@@ -45,10 +46,12 @@ public class Event implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "TB_EVENT_PLACE")
+    @JsonIgnore
     private List<Place> places = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "EVENT_ID")
+    @JsonIgnore
     private List<Ticket> tickets = new ArrayList<>();
 
     public static long getSerialversionuid() {
