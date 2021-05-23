@@ -11,6 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.facens.pooii.event.event.DTO.AttendInsertDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "TB_ATTEND")
@@ -20,6 +21,7 @@ public class Attend extends BaseUser {
 
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ATTEND_ID")
+    @JsonIgnore
     private List<Ticket> tickets = new ArrayList<>();
 
     public Attend() {
