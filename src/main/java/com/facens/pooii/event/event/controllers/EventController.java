@@ -95,10 +95,10 @@ public class EventController {
         return ResponseEntity.ok().body(event);
     }
 
-    @GetMapping("/{id}/tickets")
-    public ResponseEntity<List<Ticket>> getAllTickets(@PathVariable Long id) {
-        List<Ticket> tickets = ticketService.getTicketByEvent(id);
-        return ResponseEntity.ok().body(tickets);
-    }
+    // @GetMapping("/{id}/tickets")
+    // public ResponseEntity<List<Ticket>> getAllTickets(@PathVariable Long id) {
+    //     List<Ticket> tickets = ticketService.getTicketByEvent(id);
+    //     return ResponseEntity.ok().body(tickets);
+    // }
 
 }
