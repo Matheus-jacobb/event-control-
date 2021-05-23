@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +18,7 @@ public class Ticket implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    // private enum Type{ FREE, PAYED;}
+    public enum Type{ FREE, PAYED;}
     private Instant date;
     private Double price;
 
@@ -30,8 +32,16 @@ public class Ticket implements Serializable {
         this.price = price;
     }
 
-    // example of enum in java
-    // Type type = Type.FREE;
+    @Enumerated(value = EnumType.STRING)
+    private Type type;
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 
     public Long getId() {
         return id;

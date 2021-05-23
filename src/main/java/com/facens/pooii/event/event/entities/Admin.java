@@ -10,6 +10,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.facens.pooii.event.event.DTO.AdminInsertDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "TB_ADMIN")
@@ -19,10 +20,11 @@ public class Admin extends BaseUser {
 
     @OneToMany
     @JoinColumn(name = "ADMIN_ID")
+    @JsonIgnore
     private List<Event> events = new ArrayList<>();
 
     public Admin() {
-        
+
     }
 
     public Admin(String phoneNumber) {
