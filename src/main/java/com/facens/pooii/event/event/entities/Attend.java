@@ -23,11 +23,6 @@ public class Attend extends BaseUser {
     private List<Ticket> tickets = new ArrayList<>();
 
     public Attend() {
-        
-    }
-
-    public Attend(Double balance) {
-        this.balance = balance;
     }
 
     public Attend(Long id, String name, String email, Double balance) {
@@ -38,6 +33,10 @@ public class Attend extends BaseUser {
     public Attend(AttendInsertDTO dto) {
         super(dto.getName(), dto.getEmail());
         this.balance = dto.getBalance();
+    }
+
+    public Attend(Double balance) {
+        this.balance = balance;
     }
 
     public Double getBalance() {

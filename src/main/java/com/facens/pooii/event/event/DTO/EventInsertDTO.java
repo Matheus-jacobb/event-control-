@@ -15,6 +15,10 @@ public class EventInsertDTO {
     private LocalTime endTime;
     private String email;
     private Admin admin;
+    private Long amountFreeTickets;
+    private Long amountPayedTickets;
+
+    private Double priceTicket;
 
     public Admin getAdmin() {
         return admin;
@@ -80,4 +84,27 @@ public class EventInsertDTO {
         this.email = email;
     }
 
+    public Long getAmountFreeTickets() {
+        return amountFreeTickets;
+    }
+
+    public void setAmountFreeTickets(Long amountFreeTickets) {
+        this.amountFreeTickets = amountFreeTickets;
+    }
+
+    public Long getAmountPayedTickets() {
+        return amountPayedTickets;
+    }
+
+    public void setAmountPayedTickets(Long amountPayedTickets) {
+        this.amountPayedTickets = amountPayedTickets;
+    }
+
+    public Double getPriceTicket() {
+        return priceTicket;
+    }
+
+    public void setPriceTicket(Double priceTicket) {
+        this.priceTicket = priceTicket;
+    }
 }

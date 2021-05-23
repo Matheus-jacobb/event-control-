@@ -55,6 +55,24 @@ public class Event implements Serializable {
         return serialVersionUID;
     }
 
+    /**
+     * Constructors
+     */
+
+    public Event(String name, String description, LocalDate startDate, LocalDate endDate, LocalTime startTime,
+            LocalTime endTime, String email, Long amountFreeTickets, Long amountPayedTickets, Double priceTicket) {
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.email = email;
+        this.amountFreeTickets = amountFreeTickets;
+        this.amountPayedTickets = amountPayedTickets;
+        this.priceTicket = priceTicket;
+    }
+
     public Event() {
 
     }
@@ -67,7 +85,14 @@ public class Event implements Serializable {
         this.startTime = dto.getStartTime();
         this.endTime = dto.getEndTime();
         this.email = dto.getEmail();
+        this.amountFreeTickets = dto.getAmountFreeTickets();
+        this.amountPayedTickets = dto.getAmountPayedTickets();
+        this.priceTicket = dto.getPriceTicket();
     }
+
+    /**
+     * Getters and Setters
+     */
 
     public Long getId() {
         return id;
@@ -180,6 +205,10 @@ public class Event implements Serializable {
     public void setPlaces(Place place) {
     this.places.add(place);
     }
+
+    /**
+     * Hash code and equals
+     */
 
     @Override
     public int hashCode() {
