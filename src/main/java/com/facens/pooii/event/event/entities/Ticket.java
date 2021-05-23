@@ -32,17 +32,6 @@ public class Ticket implements Serializable {
         this.price = price;
     }
 
-    @Enumerated(value = EnumType.STRING)
-    private Type type;
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
     public Long getId() {
         return id;
     }
@@ -66,6 +55,19 @@ public class Ticket implements Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
+    
+    @Enumerated(value = EnumType.STRING)
+    private Type type;
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+
 
     public Ticket(Instant date, Double price) {
         this.date = date;
