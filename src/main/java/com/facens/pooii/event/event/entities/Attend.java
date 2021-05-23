@@ -23,6 +23,11 @@ public class Attend extends BaseUser {
     private List<Ticket> tickets = new ArrayList<>();
 
     public Attend() {
+
+    }
+
+    public Attend(Double balance) {
+        this.balance = balance;
     }
 
     public Attend(Long id, String name, String email, Double balance) {
@@ -35,10 +40,6 @@ public class Attend extends BaseUser {
         this.balance = dto.getBalance();
     }
 
-    public Attend(Double balance) {
-        this.balance = balance;
-    }
-
     public Double getBalance() {
         return balance;
     }
@@ -47,12 +48,12 @@ public class Attend extends BaseUser {
         this.balance = balance;
     }
 
-    // public List<Ticket> getTickets() {
-    // return tickets;
-    // }
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
 
-    // public void addTicket(Ticket ticket) {
-    // this.tickets.add(ticket);
-    // }
+    public void addTicket(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
 
 }
