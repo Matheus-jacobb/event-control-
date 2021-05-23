@@ -45,7 +45,7 @@ ADMIN
 
 ATTEND
 {
-    "name": "Biaca",
+    "name": "Bianca",
     "email": "biancafeira@gmail.com",
     "balance": 500
 }
