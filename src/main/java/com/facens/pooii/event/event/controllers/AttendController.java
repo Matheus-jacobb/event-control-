@@ -7,10 +7,10 @@ import com.facens.pooii.event.event.DTO.AttendInsertDTO;
 import com.facens.pooii.event.event.entities.Attend;
 import com.facens.pooii.event.event.services.AttendService;
 
-import org.eclipse.persistence.annotations.Direction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,15 +35,13 @@ public class AttendController {
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "linesPerPage", defaultValue = "2") Integer linesPerPage, 
             @RequestParam(value = "direction", defaultValue = "ASC") String direction,
-            @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
-            @RequestParam(value = "name", defaultValue = "") String name,
-            @RequestParam(value = "email", defaultValue = "id") String email
+            @RequestParam(value = "orderBy", defaultValue = "id") String orderBy
     )
 
     {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-        Page<Attend> attendees = attendService.getAllAttend(pageRequest, name, email);
-        return ResponseEntity.ok().body(attendees);
+        Page<Attend> attends = attendService.getAllAttend(pageRequest);
+        return ResponseEntity.ok().body(attends);
     }
 
     // @GetMapping

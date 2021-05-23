@@ -21,8 +21,8 @@ public class AttendService {
     @Autowired
     AttendRepository attendRepository;
 
-    public Page<Attend> getAllAttend(PageRequest pageRequest, String name, String email) {
-        return attendRepository.find(pageRequest, name, email);
+    public Page<Attend> getAllAttend(PageRequest pageRequest) {
+        return attendRepository.findAll(pageRequest);
     }
 
     public Attend getAttendById(Long id) {

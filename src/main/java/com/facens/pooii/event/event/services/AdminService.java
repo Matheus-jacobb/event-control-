@@ -9,6 +9,8 @@ import com.facens.pooii.event.event.repositories.AdminRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,8 +21,8 @@ public class AdminService {
     @Autowired
     AdminRepository adminRepository;
 
-    public List<Admin> getAllAdmins() {
-        return adminRepository.findAll();
+    public Page<Admin> getAllAdmin(PageRequest pageRequest) {
+        return adminRepository.findAll(pageRequest);
     }
 
     public Admin getAdminById(Long id) {
