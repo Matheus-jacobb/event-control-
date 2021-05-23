@@ -7,7 +7,10 @@ import com.facens.pooii.event.event.DTO.AttendInsertDTO;
 import com.facens.pooii.event.event.entities.Attend;
 import com.facens.pooii.event.event.services.AttendService;
 
+import org.eclipse.persistence.annotations.Direction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,10 +31,26 @@ public class AttendController {
     AttendService attendService;
 
     @GetMapping
-    public ResponseEntity<List<Attend>> getAllAttend() {
-        List<Attend> attends = attendService.getAllAttend();
-        return ResponseEntity.ok().body(attends);
+    public ResponseEntity<Page<Attend>> getAllEvents(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "2") Integer linesPerPage, 
+            @RequestParam(value = "direction", defaultValue = "ASC") String direction,
+            @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
+            @RequestParam(value = "name", defaultValue = "") String name,
+            @RequestParam(value = "email", defaultValue = "id") String email
+    )
+
+    {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+        Page<Attend> attendees = attendService.getAllAttend(pageRequest, name, email);
+        return ResponseEntity.ok().body(attendees);
     }
+
+    // @GetMapping
+    // public ResponseEntity<List<Attend>> getAllAttend() {
+    //     List<Attend> attends = attendService.getAllAttend();
+    //     return ResponseEntity.ok().body(attends);
+    // }
     
     @GetMapping("/{id}")
     public ResponseEntity<Attend> getAttendById(@PathVariable Long id) {
