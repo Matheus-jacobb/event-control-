@@ -1,6 +1,5 @@
 package com.facens.pooii.event.event.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.facens.pooii.event.event.DTO.PlaceInsertDTO;
@@ -9,6 +8,8 @@ import com.facens.pooii.event.event.repositories.PlaceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,8 +20,8 @@ public class PlaceService {
     @Autowired
     PlaceRepository placeRepository;
 
-    public List<Place> getAllPlace() {
-        return placeRepository.findAll();
+    public Page<Place> getAllPlace(PageRequest pageRequest) {
+        return placeRepository.findAll(pageRequest);
     }
 
     public Place getPlaceById(Long id) {

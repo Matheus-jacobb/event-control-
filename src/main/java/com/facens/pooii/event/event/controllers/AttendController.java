@@ -1,7 +1,6 @@
 package com.facens.pooii.event.event.controllers;
 
 import java.net.URI;
-import java.util.List;
 
 import com.facens.pooii.event.event.DTO.AttendInsertDTO;
 import com.facens.pooii.event.event.entities.Attend;
@@ -43,12 +42,6 @@ public class AttendController {
         Page<Attend> attends = attendService.getAllAttend(pageRequest);
         return ResponseEntity.ok().body(attends);
     }
-
-    // @GetMapping
-    // public ResponseEntity<List<Attend>> getAllAttend() {
-    //     List<Attend> attends = attendService.getAllAttend();
-    //     return ResponseEntity.ok().body(attends);
-    // }
     
     @GetMapping("/{id}")
     public ResponseEntity<Attend> getAttendById(@PathVariable Long id) {

@@ -1,7 +1,6 @@
 package com.facens.pooii.event.event.controllers;
 
 import java.net.URI;
-import java.util.List;
 
 import com.facens.pooii.event.event.DTO.AdminInsertDTO;
 import com.facens.pooii.event.event.entities.Admin;

@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AdminRepository extends JpaRepository<Admin, Long> {
 
-    public Page <Admin> findAll(Pageable pageRequest); 
+    public Page<Admin> findAll(Pageable pageRequest);
 }
