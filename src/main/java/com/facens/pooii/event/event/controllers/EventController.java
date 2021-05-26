@@ -91,14 +91,14 @@ public class EventController {
     public ResponseEntity<Event> insertEventPlace(@RequestBody EventInsertDTO dto, @PathVariable Long idEvent,
             @PathVariable Long idPlace) {
         Event event = eventService.getEventById(idEvent);
-        event.setPlaces(placeService.getPlaceById(idPlace));
+        // event.setPlaces(placeService.getPlaceById(idPlace));
         return ResponseEntity.ok().body(event);
     }
 
-    @GetMapping("/{id}/tickets")
-    public ResponseEntity<List<Ticket>> getAllTickets(@PathVariable Long id) {
-        List<Ticket> tickets = ticketService.getTicketByEvent(id);
-        return ResponseEntity.ok().body(tickets);
-    }
+    // @GetMapping("/{id}/tickets")
+    // public ResponseEntity<List<Ticket>> getAllTickets(@PathVariable Long id) {
+    //     List<Ticket> tickets = ticketService.getTicketByEvent(id);
+    //     return ResponseEntity.ok().body(tickets);
+    // }
 
 }

@@ -18,9 +18,9 @@ public class TicketService {
     @Autowired
     EventService eventService;
 
-    public List<Ticket> getTicketByEvent(Long idEvent){
-        Event event = eventService.getEventById(idEvent);
-        return event.getTickets();
-    }
+    // public List<Ticket> getTicketByEvent(Long idEvent){
+    //     Event event = eventService.getEventById(idEvent);
+    //     return event.getTickets();
+    // }
 
 }
