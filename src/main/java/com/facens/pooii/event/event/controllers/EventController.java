@@ -88,17 +88,21 @@ public class EventController {
     // AF
 
     @PostMapping("/{idEvent}/places/{idPlace}")
-    public ResponseEntity<Event> insertEventPlace(@RequestBody EventInsertDTO dto, @PathVariable Long idEvent,
-            @PathVariable Long idPlace) {
-        Event event = eventService.getEventById(idEvent);
-        // event.setPlaces(placeService.getPlaceById(idPlace));
+    public ResponseEntity<Event> insertEventPlace(@PathVariable Long idEvent, @PathVariable Long idPlace) {
+        Event event = eventService.insertEventPlace(idEvent, idPlace);
         return ResponseEntity.ok().body(event);
+    }
+
+    @DeleteMapping("/{idEvent}/places/{idPlace}")
+    public ResponseEntity<Void> deleteEventPlace(@PathVariable Long idEvent, @PathVariable Long idPlace) {
+        eventService.deleteEventPlace(idEvent, idPlace);
+        return ResponseEntity.noContent().build();
     }
 
     // @GetMapping("/{id}/tickets")
     // public ResponseEntity<List<Ticket>> getAllTickets(@PathVariable Long id) {
-    //     List<Ticket> tickets = ticketService.getTicketByEvent(id);
-    //     return ResponseEntity.ok().body(tickets);
+    // List<Ticket> tickets = ticketService.getTicketByEvent(id);
+    // return ResponseEntity.ok().body(tickets);
     // }
 
 }

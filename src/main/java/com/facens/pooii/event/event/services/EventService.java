@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.facens.pooii.event.event.DTO.EventInsertDTO;
 import com.facens.pooii.event.event.entities.Admin;
 import com.facens.pooii.event.event.entities.Event;
+import com.facens.pooii.event.event.entities.Place;
 import com.facens.pooii.event.event.repositories.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class EventService {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private PlaceService placeService;
+
     public Page<Event> getAllEvents(PageRequest pageRequest, String name, String startDate, String description) {
         return eventRepository.find(pageRequest, name, LocalDate.parse(startDate), description);
     }
@@ -35,10 +39,10 @@ public class EventService {
         return event;
     }
 
-    public Event insertEvent(Long id, EventInsertDTO dto) {
+    public Event insertEvent(Long idAdmin, EventInsertDTO dto) {
         String log = "";
         Event event = new Event(dto);
-        Admin admin = adminService.getAdminById(id);
+        Admin admin = adminService.getAdminById(idAdmin);
         event.setAdmin(admin);
         admin.addEvents(event);
         try {
@@ -98,6 +102,20 @@ public class EventService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exception found. " + log, e);
         }
+    }
+
+    public Event insertEventPlace(Long idEvent, Long idPlace){
+        Event event = eventRepository.getOne(idEvent);
+        Place place = placeService.getPlaceById(idPlace);
+        event.addPlaces(place);
+        event = eventRepository.save(event);
+        return event;
+    }
+
+    public void deleteEventPlace(Long idEvent, Long idPlace){
+        Event event = eventRepository.getOne(idEvent);
+        event.removePlaces(placeService.getPlaceById(idPlace));
+        event = eventRepository.save(event);
     }
 
 }

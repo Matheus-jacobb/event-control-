@@ -44,10 +44,10 @@ public class Event implements Serializable {
     @ManyToOne
     private Admin admin;
 
-    // @ManyToMany
-    // @JoinTable(name = "TB_EVENT_PLACE")
+    @ManyToMany
+    @JoinTable(name = "TB_EVENT_PLACE")
+    private List<Place> places = new ArrayList<>();
     // @JsonIgnore
-    // private List<Place> places = new ArrayList<>();
 
     // @OneToMany(cascade = CascadeType.PERSIST)
     // @JoinColumn(name = "EVENT_ID")
@@ -201,13 +201,17 @@ public class Event implements Serializable {
         this.admin = admin;
     }
 
-    // public List<Place> getPlaces() {
-    // return places;
-    // }
+    public List<Place> getPlaces() {
+        return places;
+    }
 
-    // public void setPlaces(Place place) {
-    // this.places.add(place);
-    // }
+    public void addPlaces(Place place) {
+        this.places.add(place);
+    }
+
+    public void removePlaces(Place place) {
+        this.places.remove(place);
+    }
 
     /**
      * Hash code and equals
