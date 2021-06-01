@@ -1,5 +1,7 @@
 # event-control
 
+Repositorio destinado para AC2 de Programação Orientada a Objetos
+
  - CRUD.
  - Listagem Paginada.
  - Pesquisa Por Id.
