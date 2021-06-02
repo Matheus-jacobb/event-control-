@@ -12,7 +12,7 @@ Repositorio destinado para AC2 de Programação Orientada a Objetos
 
 # Dupla
  - Matheus Jacob Bendel - 190299
- - Antonio Canno de Araujo - 190929
+ - Antonio Luís Canno de Araujo - 190929
 
  <details>
   <summary><strong>JSON DAS ENTIDADES</strong></summary>
