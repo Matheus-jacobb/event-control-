@@ -49,6 +49,12 @@ ATTEND
     "email": "biancafeira@gmail.com",
     "balance": 500
 }
+
+PLACE
+{
+  "name": "FACENS",
+  "adress": "Rodovia Senador José Ermírio de Moraes, 1425 - Jardim Constantino Matucci, Sorocaba"
+}
 ```
   </p>
   

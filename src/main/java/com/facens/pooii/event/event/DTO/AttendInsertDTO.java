@@ -8,8 +8,4 @@ public class AttendInsertDTO extends BaseUserDTO {
         return balance;
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
-
 }
