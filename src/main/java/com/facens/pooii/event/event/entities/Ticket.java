@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.facens.pooii.event.event.DTO.TicketInsertDTO;
 
 @Entity
 @Table(name = "TB_TICKET")
@@ -18,9 +18,9 @@ public class Ticket implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    public enum Type{ FREE, PAYED;}
     private Instant date;
     private Double price;
+    private Type type;
 
     public Ticket() {
 
@@ -30,6 +30,19 @@ public class Ticket implements Serializable {
         this.id = id;
         this.date = date;
         this.price = price;
+    }
+
+    public Ticket(TicketInsertDTO dto) {
+        this.price = dto.getPrice();
+        this.type = dto.getType();
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Long getId() {
@@ -55,24 +68,15 @@ public class Ticket implements Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
-    
-    @Enumerated(value = EnumType.STRING)
-    private Type type;
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-
 
     public Ticket(Instant date, Double price) {
         this.date = date;
         this.price = price;
     }
+
+    /**
+     * Hash code and equals
+     */
 
     @Override
     public int hashCode() {

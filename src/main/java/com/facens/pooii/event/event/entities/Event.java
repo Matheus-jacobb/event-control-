@@ -44,15 +44,14 @@ public class Event implements Serializable {
     @ManyToOne
     private Admin admin;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "TB_EVENT_PLACE")
     private List<Place> places = new ArrayList<>();
-    // @JsonIgnore
 
-    // @OneToMany(cascade = CascadeType.PERSIST)
-    // @JoinColumn(name = "EVENT_ID")
-    // @JsonIgnore
-    // private List<Ticket> tickets = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "EVENT_ID")
+    @JsonIgnore
+    private List<Ticket> tickets = new ArrayList<>();
 
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -185,13 +184,13 @@ public class Event implements Serializable {
         this.priceTicket = priceTicket;
     }
 
-    // public List<Ticket> getTickets() {
-    // return tickets;
-    // }
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
 
-    // public void addTicket(Ticket ticket) {
-    // this.tickets.add(ticket);
-    // }
+    public void addTicket(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
 
     public Admin getAdmin() {
         return admin;

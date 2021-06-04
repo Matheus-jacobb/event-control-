@@ -7,10 +7,10 @@ import java.net.URI;
 import java.util.List;
 
 import com.facens.pooii.event.event.DTO.EventInsertDTO;
+import com.facens.pooii.event.event.DTO.TicketInsertDTO;
 import com.facens.pooii.event.event.entities.Event;
 import com.facens.pooii.event.event.entities.Ticket;
 import com.facens.pooii.event.event.services.EventService;
-import com.facens.pooii.event.event.services.PlaceService;
 import com.facens.pooii.event.event.services.TicketService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,6 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
-
-    @Autowired
-    private PlaceService placeService;
 
     @Autowired
     private TicketService ticketService;
@@ -85,8 +82,6 @@ public class EventController {
         return ResponseEntity.ok().body(event);
     }
 
-    // AF
-
     @PostMapping("/{idEvent}/places/{idPlace}")
     public ResponseEntity<Event> insertEventPlace(@PathVariable Long idEvent, @PathVariable Long idPlace) {
         Event event = eventService.insertEventPlace(idEvent, idPlace);
@@ -99,10 +94,22 @@ public class EventController {
         return ResponseEntity.noContent().build();
     }
 
-    // @GetMapping("/{id}/tickets")
-    // public ResponseEntity<List<Ticket>> getAllTickets(@PathVariable Long id) {
-    // List<Ticket> tickets = ticketService.getTicketByEvent(id);
-    // return ResponseEntity.ok().body(tickets);
-    // }
+    /**
+     * TICKET MAPPING
+     */
+
+    @GetMapping("/{idEvent}/tickets")
+    public ResponseEntity<List<Ticket>> getAllTickets(@PathVariable Long id) {
+        List<Ticket> tickets = ticketService.getTicketByEvent(id);
+        return ResponseEntity.ok().body(tickets);
+    }
+
+    @PostMapping("/{id}/tickets")
+    public ResponseEntity<Ticket> insertTicket(@PathVariable Long id, @RequestBody TicketInsertDTO insertDTO) {
+        Ticket ticket = ticketService.insertTicket(id, insertDTO);
+        Event event = eventService.getEventById(id);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(event.getId()).toUri();
+        return ResponseEntity.created(uri).body(ticket);
+    }
 
 }

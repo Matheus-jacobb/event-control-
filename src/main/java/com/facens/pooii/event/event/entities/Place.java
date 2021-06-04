@@ -67,6 +67,10 @@ public class Place implements Serializable {
     // this.events.add(event);
     // }
 
+    /**
+     * Hash code and equals
+     */
+
     @Override
     public int hashCode() {
         final int prime = 31;
