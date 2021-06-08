@@ -63,9 +63,9 @@ public class EventController {
         return ResponseEntity.ok().body(event);
     }
 
-    @PostMapping("/{idAdmin}")
-    public ResponseEntity<Event> insertEvent(@PathVariable Long idAdmin, @RequestBody EventInsertDTO insertDTO) {
-        Event event = eventService.insertEvent(idAdmin, insertDTO);
+    @PostMapping
+    public ResponseEntity<Event> insertEvent(@RequestBody EventInsertDTO insertDTO) {
+        Event event = eventService.insertEvent(insertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(event.getId()).toUri();
         return ResponseEntity.created(uri).body(event);
     }
@@ -98,7 +98,7 @@ public class EventController {
      * TICKET MAPPING
      */
 
-    @GetMapping("/{idEvent}/tickets")
+    @GetMapping("/{id}/tickets")
     public ResponseEntity<List<Ticket>> getAllTickets(@PathVariable Long id) {
         List<Ticket> tickets = ticketService.getTicketByEvent(id);
         return ResponseEntity.ok().body(tickets);

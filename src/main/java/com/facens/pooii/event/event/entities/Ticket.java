@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.facens.pooii.event.event.DTO.TicketInsertDTO;
@@ -21,6 +22,9 @@ public class Ticket implements Serializable {
     private Instant date;
     private Double price;
     private Type type;
+
+    @ManyToOne
+    private Attend attend;
 
     public Ticket() {
 
@@ -72,6 +76,14 @@ public class Ticket implements Serializable {
     public Ticket(Instant date, Double price) {
         this.date = date;
         this.price = price;
+    }
+
+    public Attend getAttend() {
+        return attend;
+    }
+
+    public void setAttend(Attend attend) {
+        this.attend = attend;
     }
 
     /**

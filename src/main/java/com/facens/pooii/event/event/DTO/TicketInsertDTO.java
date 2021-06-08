@@ -6,6 +6,7 @@ public class TicketInsertDTO {
 
     private Double price;
     private Type type;
+    private Long attendId;
 
     public Type getType() {
         return type;
@@ -21,6 +22,14 @@ public class TicketInsertDTO {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Long getAttendId() {
+        return attendId;
+    }
+
+    public void setAttendId(Long attendId) {
+        this.attendId = attendId;
     }
 
 }
