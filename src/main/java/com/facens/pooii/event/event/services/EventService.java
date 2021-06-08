@@ -39,10 +39,10 @@ public class EventService {
         return event;
     }
 
-    public Event insertEvent(Long idAdmin, EventInsertDTO dto) {
+    public Event insertEvent(EventInsertDTO dto) {
         String log = "";
         Event event = new Event(dto);
-        Admin admin = adminService.getAdminById(idAdmin);
+        Admin admin = adminService.getAdminById(dto.getAdminId());
         event.setAdmin(admin);
         admin.addEvents(event);
         try {
