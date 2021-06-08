@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.facens.pooii.event.event.DTO.TicketInsertDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "TB_TICKET")
@@ -19,9 +20,13 @@ public class Ticket implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Instant date;
-    private Double price;
     private Type type;
+    
+    @JsonIgnore
+    private Instant date;
+
+    @JsonIgnore
+    private Double price;
 
     @ManyToOne
     private Attend attend;

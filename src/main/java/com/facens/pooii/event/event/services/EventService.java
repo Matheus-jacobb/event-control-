@@ -81,7 +81,7 @@ public class EventService {
             } else {
                 try {
                     Event event = eventRepository.getOne(id);
-                    if(event.getEndDate().isBefore(LocalDate.now())){
+                    if (event.getEndDate().isBefore(LocalDate.now())) {
                         log = "Unable to update a closed event!";
                         throw new Exception();
                     }
@@ -104,18 +104,42 @@ public class EventService {
         }
     }
 
-    public Event insertEventPlace(Long idEvent, Long idPlace){
+    public Event insertEventPlace(Long idEvent, Long idPlace) {
         Event event = eventRepository.getOne(idEvent);
         Place place = placeService.getPlaceById(idPlace);
+        insertPlaceValidation(event, place);
         event.addPlaces(place);
         event = eventRepository.save(event);
         return event;
     }
 
-    public void deleteEventPlace(Long idEvent, Long idPlace){
+    public void deleteEventPlace(Long idEvent, Long idPlace) {
         Event event = eventRepository.getOne(idEvent);
         event.removePlaces(placeService.getPlaceById(idPlace));
         event = eventRepository.save(event);
+    }
+
+    public void insertPlaceValidation(Event event, Place place) {
+        String log = "";
+        try {
+            for (Place aux : event.getPlaces()) {
+                if (aux.equals(place)) {
+                    log = "Place already associated with this event";
+                    throw new Exception();
+                }
+            }
+            // for (Event aux : place.getEvents()) {
+            // if ((event.getStartDate().isAfter(aux.getStartDate())
+            // && event.getStartDate().isBefore(aux.getEndDate()))
+            // || (event.getEndDate().isAfter(aux.getStartDate())
+            // && event.getEndDate().isBefore(aux.getEndDate()))) {
+            // log = "Date conflict when inserting event";
+            // throw new Exception();
+            // }
+            // }
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exception found. " + log, e);
+        }
     }
 
 }

@@ -82,6 +82,10 @@ public class EventController {
         return ResponseEntity.ok().body(event);
     }
 
+    /**
+     * PLACE MAPPING
+     */
+
     @PostMapping("/{idEvent}/places/{idPlace}")
     public ResponseEntity<Event> insertEventPlace(@PathVariable Long idEvent, @PathVariable Long idPlace) {
         Event event = eventService.insertEventPlace(idEvent, idPlace);

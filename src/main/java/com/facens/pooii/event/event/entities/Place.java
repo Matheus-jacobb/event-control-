@@ -1,11 +1,16 @@
 package com.facens.pooii.event.event.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.facens.pooii.event.event.DTO.PlaceInsertDTO;
@@ -19,6 +24,10 @@ public class Place implements Serializable {
     private Long id;
     private String name;
     private String address;
+
+    // @ManyToMany
+    // @JoinTable(name = "TB_EVENT_PLACE")
+    // private List<Event> events = new ArrayList<>();
 
     public Place() {
 
@@ -60,11 +69,11 @@ public class Place implements Serializable {
     }
 
     // public List<Event> getEvents() {
-    // return events;
+    //     return events;
     // }
 
     // public void addEvents(Event event) {
-    // this.events.add(event);
+    //     this.events.add(event);
     // }
 
     /**
