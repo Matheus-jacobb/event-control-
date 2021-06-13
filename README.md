@@ -24,6 +24,7 @@ Repositorio destinado para AC2 de Programação Orientada a Objetos
 ```json
 EVENT
 {
+    "adminId": 1,
     "name": "Plugin: Desafios do 5G",
     "description": "Um evento 100% online, interativo e aberto ao público, com speakers internacionais.",
     "startDate": "2021-07-01",
@@ -54,6 +55,13 @@ PLACE
 {
   "name": "FACENS",
   "adress": "Rodovia Senador José Ermírio de Moraes, 1425 - Jardim Constantino Matucci, Sorocaba"
+}
+
+TICKET
+{
+  "attendId": 2,
+  "price": 50,
+  "type": "PAYED"
 }
 ```
   </p>
