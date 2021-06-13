@@ -14,12 +14,11 @@ public class EventInsertDTO {
     private LocalTime startTime;
     private LocalTime endTime;
     private String email;
-    private Admin admin;
     private Long amountFreeTickets;
     private Long amountPayedTickets;
-    private Long adminId;
-
     private Double priceTicket;
+    private Long adminId;
+    private Admin admin;
 
     public Long getAdminId() {
         return adminId;

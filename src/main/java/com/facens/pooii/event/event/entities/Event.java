@@ -48,7 +48,7 @@ public class Event implements Serializable {
     @JoinTable(name = "TB_EVENT_PLACE")
     private List<Place> places = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany
     @JoinColumn(name = "EVENT_ID")
     @JsonIgnore
     private List<Ticket> tickets = new ArrayList<>();
@@ -168,12 +168,28 @@ public class Event implements Serializable {
         this.amountFreeTickets = amountFreeTickets;
     }
 
+    public void ticketFreeDecrement(){
+        this.amountFreeTickets--;
+    }
+
+    public void ticketFreeIncrement(){
+        this.amountFreeTickets++;
+    }
+
     public Long getAmountPayedTickets() {
         return amountPayedTickets;
     }
 
     public void setAmountPayedTickets(Long amountPayedTickets) {
         this.amountPayedTickets = amountPayedTickets;
+    }
+
+    public void ticketPayedDecrement(){
+        this.amountPayedTickets--;
+    }
+
+    public void ticketPayedIncrement(){
+        this.amountPayedTickets++;
     }
 
     public Double getPriceTicket() {

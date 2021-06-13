@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Attend extends BaseUser {
     private Double balance;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany
     @JoinColumn(name = "ATTEND_ID")
     @JsonIgnore
     private List<Ticket> tickets = new ArrayList<>();

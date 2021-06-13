@@ -3,6 +3,7 @@ package com.facens.pooii.event.event.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,8 +29,11 @@ public class Ticket implements Serializable {
     @JsonIgnore
     private Double price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Attend attend;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Event event;
 
     public Ticket() {
 
@@ -89,6 +93,14 @@ public class Ticket implements Serializable {
 
     public void setAttend(Attend attend) {
         this.attend = attend;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
     /**

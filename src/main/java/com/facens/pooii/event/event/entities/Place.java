@@ -4,12 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -25,9 +23,8 @@ public class Place implements Serializable {
     private String name;
     private String address;
 
-    // @ManyToMany
-    // @JoinTable(name = "TB_EVENT_PLACE")
-    // private List<Event> events = new ArrayList<>();
+    @ManyToMany
+    private List<Event> events = new ArrayList<>();
 
     public Place() {
 
@@ -68,13 +65,13 @@ public class Place implements Serializable {
         this.address = address;
     }
 
-    // public List<Event> getEvents() {
-    //     return events;
-    // }
+    public List<Event> getEvents() {
+        return events;
+    }
 
-    // public void addEvents(Event event) {
-    //     this.events.add(event);
-    // }
+    public void addEvents(Event event) {
+        this.events.add(event);
+    }
 
     /**
      * Hash code and equals
