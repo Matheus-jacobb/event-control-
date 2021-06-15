@@ -13,6 +13,7 @@ import com.facens.pooii.event.event.repositories.EventRepository;
 import com.facens.pooii.event.event.repositories.TicketRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -86,6 +87,24 @@ public class TicketService {
             }
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exception found: " + log, e);
+        }
+    }
+
+    public void deleteTicket(Long id) {
+
+        try {
+            Ticket ticket = ticketRepository.getOne(id);
+            ticket.getAttend().setBalance(ticket.getAttend().getBalance() + ticket.getPrice());
+            
+            if (ticket.getType() == Type.PAYED) 
+                ticket.getEvent().ticketPayedIncrement();
+             else 
+                ticket.getEvent().ticketFreeIncrement();
+
+            ticket = ticketRepository.save(ticket);
+            ticketRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ticket not found");
         }
     }
 

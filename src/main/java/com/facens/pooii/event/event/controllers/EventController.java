@@ -116,4 +116,9 @@ public class EventController {
         return ResponseEntity.created(uri).body(ticket);
     }
 
+    @DeleteMapping("/tickets/{id}")
+    public ResponseEntity<Void> deleteTicket(@PathVariable Long id) {
+        ticketService.deleteTicket(id);
+        return ResponseEntity.noContent().build();
+    }
 }
