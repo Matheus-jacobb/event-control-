@@ -62,11 +62,21 @@ public class EventService {
     }
 
     public void deleteEvent(Long id) {
-        try {
-            eventRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
-        }
+
+        String log="";
+
+         
+            try {
+                if (eventRepository.getOne(id).getTickets().isEmpty())
+                     eventRepository.deleteById(id);
+                else{
+                    log = "Event has tickets sold";
+                    throw new Exception();
+                }
+            } catch (Exception e) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exception found. " + log, e);
+            }
+        
     }
 
     public Event updateEvent(Long id, EventInsertDTO dto) {
