@@ -1,9 +1,12 @@
 package com.facens.pooii.event.event.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.facens.pooii.event.event.DTO.PlaceInsertDTO;
+import com.facens.pooii.event.event.entities.Event;
 import com.facens.pooii.event.event.entities.Place;
+import com.facens.pooii.event.event.repositories.EventRepository;
 import com.facens.pooii.event.event.repositories.PlaceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class PlaceService {
 
     @Autowired
     PlaceRepository placeRepository;
+
+    @Autowired
+    EventRepository eventRepository;
 
     public Page<Place> getAllPlace(PageRequest pageRequest) {
         return placeRepository.findAll(pageRequest);
@@ -36,22 +42,38 @@ public class PlaceService {
         return place;
     }
 
-    public void deletePlace(Long id) {
+    public boolean deletePlace(Long id) {
         try {
-            placeRepository.deleteById(id);
+            Place place = placeRepository.getOne(id);
+            List<Event> events = eventRepository.findAll();
+            boolean ans = deletePlaceValidation(place, events);
+            if (ans) {
+                placeRepository.deleteById(id);
+                return true;
+            }
+            return false;
         } catch (EmptyResultDataAccessException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Place not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Place not found", e);
         }
     }
 
+    public boolean deletePlaceValidation(Place place, List<Event> events) {
+        for (Event aux : events) {
+            //LOGICA INCORRETA
+            if (aux.getPlaces().contains(place))
+                return false;
+        }
+        return true;
+    }
+
     public Place updatePlace(Long id, PlaceInsertDTO dto) {
-        try{
+        try {
             Place place = placeRepository.getOne(id);
             place.setName(dto.getName());
             place.setAddress(dto.getAddress());
             place = placeRepository.save(place);
             return place;
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Place not found.");
         }
     }

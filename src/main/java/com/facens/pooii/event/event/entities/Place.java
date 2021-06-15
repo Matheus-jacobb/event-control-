@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.facens.pooii.event.event.DTO.PlaceInsertDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "TB_PLACE")
@@ -23,6 +24,7 @@ public class Place implements Serializable {
     private String name;
     private String address;
 
+    @JsonIgnore
     @ManyToMany
     private List<Event> events = new ArrayList<>();
 
@@ -71,6 +73,10 @@ public class Place implements Serializable {
 
     public void addEvents(Event event) {
         this.events.add(event);
+    }
+
+    public void removeEvents(Event event) {
+        this.events.remove(event);
     }
 
     /**

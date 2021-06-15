@@ -44,8 +44,8 @@ public class Event implements Serializable {
     @ManyToOne
     private Admin admin;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "TB_EVENT_PLACE")
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Place> places = new ArrayList<>();
 
     @OneToMany

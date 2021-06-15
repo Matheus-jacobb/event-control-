@@ -56,8 +56,9 @@ public class PlaceController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePlace(@PathVariable Long id) {
-        placeService.deletePlace(id);
-        return ResponseEntity.noContent().build();
+        if(placeService.deletePlace(id))
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.badRequest().body(null);
     }
 
     @PutMapping("/{id}")

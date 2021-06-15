@@ -10,7 +10,6 @@ import com.facens.pooii.event.event.entities.Place;
 import com.facens.pooii.event.event.repositories.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -119,13 +118,16 @@ public class EventService {
         Place place = placeService.getPlaceById(idPlace);
         insertPlaceValidation(event, place);
         event.addPlaces(place);
+        place.addEvents(event);
         event = eventRepository.save(event);
         return event;
     }
 
     public void deleteEventPlace(Long idEvent, Long idPlace) {
         Event event = eventRepository.getOne(idEvent);
-        event.removePlaces(placeService.getPlaceById(idPlace));
+        Place place = placeService.getPlaceById(idPlace);
+        event.removePlaces(place);
+        place.removeEvents(event);
         event = eventRepository.save(event);
     }
 
