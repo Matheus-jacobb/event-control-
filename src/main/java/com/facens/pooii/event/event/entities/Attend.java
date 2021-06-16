@@ -38,7 +38,7 @@ public class Attend extends BaseUser {
 
     public Attend(AttendInsertDTO dto) {
         super(dto.getName(), dto.getEmail());
-        this.balance = dto.getBalance();
+        this.balance = 0.0;
     }
 
     public Double getBalance() {

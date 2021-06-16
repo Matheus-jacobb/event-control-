@@ -1,6 +1,7 @@
 package com.facens.pooii.event.event.services;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.facens.pooii.event.event.DTO.TicketInsertDTO;
@@ -55,6 +56,16 @@ public class TicketService {
 
         Boolean isFull = limitValidation(event, ticket.getType());
 
+
+        try{
+            if (event.getEndDate().isBefore(LocalDate.now())){
+                throw new Exception();
+            }
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Event already happened");
+        }
+
         try{
             if (isFull)
                 throw new Exception();
@@ -95,20 +106,6 @@ public class TicketService {
      * Validators
      */
 
-    public double dueTicket(Ticket ticket) {
-        double balance = 0;
-        try {
-            balance = ticket.getAttend().getBalance() - ticket.getPrice();
-            if (balance >= 0) {
-                return balance;
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Balance unavailable", e);
-        }
-    }
-
     public void ticketValidation(TicketInsertDTO dto) {
         String log = "";
         try {
@@ -122,7 +119,6 @@ public class TicketService {
 
     public void isPayed(Ticket ticket){
         if (ticket.getType() == Type.PAYED) {
-            ticket.getAttend().setBalance(dueTicket(ticket));
             ticket.getEvent().ticketPayedDecrement();
         } else {
             ticket.getEvent().ticketFreeDecrement();
