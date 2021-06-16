@@ -1,9 +1,12 @@
 package com.facens.pooii.event.event.controllers;
 
 import java.net.URI;
+import java.util.List;
 
 import com.facens.pooii.event.event.DTO.PlaceInsertDTO;
+import com.facens.pooii.event.event.entities.Event;
 import com.facens.pooii.event.event.entities.Place;
+import com.facens.pooii.event.event.repositories.EventRepository;
 import com.facens.pooii.event.event.services.PlaceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,9 @@ public class PlaceController {
 
     @Autowired
     PlaceService placeService;
+
+    @Autowired
+    EventRepository eventRepository;
 
     @GetMapping
     public ResponseEntity<Page<Place>> getAllPlace(@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -56,9 +62,14 @@ public class PlaceController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePlace(@PathVariable Long id) {
-        if(placeService.deletePlace(id))
-            return ResponseEntity.noContent().build();
-        return ResponseEntity.badRequest().body(null);
+        Place place = placeService.getPlaceById(id);
+        List<Event> events = eventRepository.findAll();
+        for (Event aux : events) {
+            if (aux.getPlaces().contains(place))
+                return ResponseEntity.badRequest().build();
+        }
+        placeService.deletePlace(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
