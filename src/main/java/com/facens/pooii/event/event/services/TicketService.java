@@ -47,16 +47,17 @@ public class TicketService {
         Attend attend = attendService.getAttendById(dto.getAttendId());
         Ticket ticket = new Ticket(dto);
         
+        ticket.setPrice(event.getPriceTicket());
+        ticket.setDate(Instant.now());
+        ticket.setAttend(attend);
+        ticket.setEvent(event);
+        
+
         Boolean isFull = limitValidation(event, ticket.getType());
 
         try{
             if (isFull)
                 throw new Exception();
-
-            
-            ticket.setDate(Instant.now());
-            ticket.setAttend(attend);
-            ticket.setEvent(event);
             
             isPayed(ticket);
             ticket = ticketRepository.save(ticket);
