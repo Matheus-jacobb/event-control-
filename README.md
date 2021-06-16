@@ -60,7 +60,6 @@ PLACE
 TICKET
 {
   "attendId": 2,
-  "price": 50,
   "type": "PAYED"
 }
 ```

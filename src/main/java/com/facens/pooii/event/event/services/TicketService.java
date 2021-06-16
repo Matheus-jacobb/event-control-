@@ -79,7 +79,10 @@ public class TicketService {
             Ticket ticket = ticketRepository.getOne(id);
             ticket.getAttend().setBalance(ticket.getAttend().getBalance() + ticket.getPrice());
 
-            isPayed(ticket);
+            if (ticket.getType() == Type.PAYED) 
+                ticket.getEvent().ticketPayedIncrement();
+            else 
+                ticket.getEvent().ticketFreeIncrement();
 
             ticket = ticketRepository.save(ticket);
             ticketRepository.deleteById(id);
@@ -111,11 +114,6 @@ public class TicketService {
         try {
             if (dto.getType() == Type.FREE) {
                 dto.setPrice(0.0);
-            } else {
-                if (dto.getPrice() <= 0) {
-                    log = "Exception found: Price must be greater than $0";
-                    throw new Exception();
-                }
             }
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exception found: " + log, e);

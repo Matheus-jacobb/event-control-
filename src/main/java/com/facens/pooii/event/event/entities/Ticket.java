@@ -46,7 +46,6 @@ public class Ticket implements Serializable {
     }
 
     public Ticket(TicketInsertDTO dto) {
-        // this.price = dto.getPrice();
         this.type = dto.getType();
     }
 
