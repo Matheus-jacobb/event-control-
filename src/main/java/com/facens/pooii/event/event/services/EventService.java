@@ -46,52 +46,55 @@ public class EventService {
         admin.addEvents(event);
         try {
             if (event.getStartDate().isBefore(LocalDate.now())) {
-                log = "Disagreement with date rule. Start date before today!";
+                log = "Disagreement with date rule. Start date before today";
                 throw new Exception();
             } else if (event.getEndDate().isBefore(event.getStartDate())) {
-                log = "Disagreement with date rule. End date before start date!";
+                log = "Disagreement with date rule. End date before start date";
                 throw new Exception();
             } else {
                 event = eventRepository.save(event);
                 return event;
             }
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exception found. " + log, e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, log, e);
         }
     }
 
     public void deleteEvent(Long id) {
 
-        String log="";
+        String log = "";
 
-         
-            try {
-                if (eventRepository.getOne(id).getTickets().isEmpty())
-                     eventRepository.deleteById(id);
-                else{
-                    log = "Event has tickets sold";
-                    throw new Exception();
-                }
-            } catch (Exception e) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Exception found. " + log, e);
+        try {
+            if (eventRepository.getOne(id).getTickets().isEmpty())
+                eventRepository.deleteById(id);
+            else {
+                log = "Event has tickets sold";
+                throw new Exception();
             }
-        
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, log, e);
+        }
+
     }
 
     public Event updateEvent(Long id, EventInsertDTO dto) {
         String log = "";
         try {
+            if (dto.getEndDate().isBefore(LocalDate.now())) {
+                log = "Finished event";
+                throw new Exception();
+            }
             if (dto.getStartDate().isBefore(LocalDate.now())) {
-                log = "Disagreement with date rule. Start date before today!";
+                log = "Disagreement with date rule. Start date before today";
                 throw new Exception();
             } else if (dto.getEndDate().isBefore(dto.getStartDate())) {
-                log = "Disagreement with date rule. End date before start date!";
+                log = "Disagreement with date rule. End date before start date";
                 throw new Exception();
             } else {
                 try {
                     Event event = eventRepository.getOne(id);
                     if (event.getEndDate().isBefore(LocalDate.now())) {
-                        log = "Unable to update a closed event!";
+                        log = "Unable to update a closed event";
                         throw new Exception();
                     }
                     event.setName(dto.getName());
@@ -104,12 +107,12 @@ public class EventService {
                     event = eventRepository.save(event);
                     return event;
                 } catch (Exception e) {
-                    log = "Event not found.";
+                    log = "Event not found";
                     throw new Exception();
                 }
             }
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exception found. " + log, e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, log, e);
         }
     }
 
@@ -150,7 +153,7 @@ public class EventService {
             // }
             // }
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exception found. " + log, e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, log, e);
         }
     }
 
