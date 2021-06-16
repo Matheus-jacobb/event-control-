@@ -32,6 +32,7 @@ public class AttendService {
 
     public Attend insertAttend(AttendInsertDTO dto) {
         Attend attend = new Attend(dto);
+        attend.setBalance(0.0);
         attend = attendRepository.save(attend);
         return attend;
     }

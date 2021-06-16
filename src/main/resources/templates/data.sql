@@ -10,7 +10,7 @@ VALUES (
     '1',
     '0',
     '0',
-    '1'
+    'g'
     );
 
     INSERT INTO TB_EVENT (name, description, start_date, end_date, start_time, end_time, email, amount_free_tickets, amount_payed_tickets, price_ticket, admin_id) 
@@ -127,20 +127,38 @@ VALUES (
     '3'
     );
 
-    INSERT INTO TB_ADMIN (balance, base_user_id) 
+    INSERT INTO TB_ATTEND (balance, base_user_id) 
 VALUES (
-    '11912345678',
+    '0',
     '4'
     );
 
-    INSERT INTO TB_ADMIN (balance, base_user_id) 
+    INSERT INTO TB_ATTEND (balance, base_user_id) 
 VALUES (
-    '11987456123',
+    '0',
     '5'
     );
 
-    INSERT INTO TB_ADMIN (balance, base_user_id) 
+    INSERT INTO TB_ATTEND (balance, base_user_id)  
 VALUES (
-    '11978456123',
+    '0',
     '6'
+    );
+
+        INSERT INTO TB_PLACE(name, address)
+VALUES (
+        'FACENS',
+        'Rua Dr Glauco Todesco'
+    );
+
+        INSERT INTO TB_PLACE(name, address)
+VALUES (
+        'HAVARD',
+        'Rua Matheus Jacob'
+    );
+
+        INSERT INTO TB_PLACE(name, address)
+VALUES (
+        'OXFORD',
+        'Rua Antonio Canno'
     );
