@@ -243,7 +243,7 @@ TICKET
 ```json
 {
   "attendeId": 5,
-  "type": PAYED
+  "type": "PAYED"
 }
 ```
 
@@ -254,7 +254,7 @@ TICKET
 ```json
 {
   "attendeId": 5,
-  "type": FREE
+  "type": "FREE"
 }
 ```
  </detail>
