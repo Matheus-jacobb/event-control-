@@ -243,18 +243,18 @@ TICKET
 ```json
 {
   "attendeId": 5,
-  "type": 1
+  "type": PAYED
 }
 ```
 
 - DEL: /events/{eventId}/tickets
   - Remove ticket vendido.
-  - Separação feita entre tickets pagos e gratuitos através do campo "type", onde 0 é gratuito e 1 é pago.
+  - Separação feita entre tickets pagos e gratuitos através do campo "type", onde FREE é gratuito e PAYED é pago.
 
 ```json
 {
   "attendeId": 5,
-  "type": 0
+  "type": FREE
 }
 ```
  </detail>
