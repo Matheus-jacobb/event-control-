@@ -199,8 +199,8 @@ TICKET
 
 ```json
 {
-  "name": "Casa do Joga10",
-  "address": "Rua Monsenhor Benedito Mário Calazans"
+  "name": "FACENS",
+  "address": "Rodovia Senador José Ermírio de Moraes, 1425"
 }
 ```
 
